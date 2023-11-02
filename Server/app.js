@@ -1,5 +1,6 @@
 const express = require("express");
 const pool = require('./config/db.js');
+const courseRouter = require('./routes/courseRoutes.js');
 const cors = require("cors");
 
 require("dotenv").config();
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
     console.error('Database connection error:', error);
   }
 })();
+app.use('/api/v1',courseRouter);
 
 app.get("/", (req, res) => {
   res.send("Server is Running! 🚀");
