@@ -12,5 +12,7 @@ courseRouter.get('/courses/:courseId', CourseController.getCourseDetails);
 courseRouter.put('/courses/:courseId/completed', CourseController.markCourseAsCompleted);
 // Retrieve course details for the student's dashboard
 courseRouter.get('/students/:studentId/courses/:courseId/details', CourseController.getCourseDetailsForDashboard);
+// Define a route for paginated course list
+courseRouter.get('/coursesperpage', CourseController.getPaginatedCourses);
 
 module.exports = courseRouter;

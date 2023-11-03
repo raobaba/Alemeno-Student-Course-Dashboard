@@ -71,11 +71,20 @@ const getCourseDetailsForDashboard = async (studentId, courseId) => {
   }
 };
 
+const findAllCourse = async (options) => {
+  const { page, pageSize } = options;
+  const offset = (page - 1) * pageSize;
+  const limit = pageSize;
+
+  const [rows] = await pool.query('SELECT * FROM courses LIMIT ?, ?', [offset, limit]);
+  return rows;
+};
 
 module.exports = {
   createCourse,
   findAll,
   findById,
   markCourseAsCompleted,
-  getCourseDetailsForDashboard
+  getCourseDetailsForDashboard,
+  findAllCourse
 };

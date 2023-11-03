@@ -69,11 +69,34 @@ const getCourseDetailsForDashboard = async (req, res) => {
   }
 };
 
+
+const getPaginatedCourses = async (req, res) => {
+  try {
+    // Extract page and pageSize values from the request or JSON data.
+    const { page, pageSize } = req.body;
+    // Check if page and pageSize are valid numbers.
+    if (isNaN(page) || isNaN(pageSize)) {
+      return res.status(400).json({ error: 'Invalid page or pageSize values' });
+    }
+    const options = {
+      page: parseInt(page),          // Parse page as an integer
+      pageSize: parseInt(pageSize),  // Parse pageSize as an integer
+    };
+    // Use the options object to fetch paginated courses.
+    const courses = await Course.findAllCourse(options);
+    res.json({ courses });
+  } catch (error) {
+    console.error('Error in getPaginatedCourses:', error);
+    res.status(500).json({ error: 'Failed to retrieve paginated courses' });
+  }
+};
+
 // Define other course-related controller functions here (e.g., create, update, delete).
 module.exports = {
   createCourse,
   getCourses,
   getCourseDetails,
   markCourseAsCompleted,
-  getCourseDetailsForDashboard
+  getCourseDetailsForDashboard,
+  getPaginatedCourses
 };
