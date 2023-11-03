@@ -1,0 +1,56 @@
+/* CourseDetails.css */
+
+.course-details {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .details-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .course-info {
+    flex: 1;
+  }
+  
+  h2 {
+    font-size: 20px;
+    margin: 0;
+    color: #333;
+  }
+  
+  p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  .syllabus {
+    flex: 1;
+  }
+  
+  h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 600px) {
+    .course-details {
+      padding: 10px;
+    }
+    .details-container {
+      flex-direction: column;
+    }
+  }
+  
