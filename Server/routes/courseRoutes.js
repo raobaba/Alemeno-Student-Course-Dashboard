@@ -1,5 +1,3 @@
-// routes/courseRoutes.js
-
 const express = require('express');
 const courseRouter = express.Router();
 const CourseController = require('../controllers/CourseController');
@@ -13,6 +11,11 @@ courseRouter.get('/courses', CourseController.getCourses);
 // Retrieve details of a specific course
 courseRouter.get('/courses/:courseId', CourseController.getCourseDetails);
 
-// Define routes for other course-related actions (e.g., create, update, delete).
+// Mark a course as completed for a student
+courseRouter.put('/courses/:courseId/completed', CourseController.markCourseAsCompleted);
+
+// Retrieve course details for the student's dashboard
+courseRouter.get('/students/:studentId/courses/:courseId/details', CourseController.getCourseDetailsForDashboard);
+
 
 module.exports = courseRouter;

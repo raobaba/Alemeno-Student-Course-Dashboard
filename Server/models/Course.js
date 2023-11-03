@@ -1,15 +1,6 @@
 // models/Course.js
 const pool = require('../config/db.js');
 
-const findAll = async () => {
-  const [rows] = await pool.query('SELECT * FROM courses');
-  return rows;
-};
-
-const findById = async (courseId) => {
-  const [rows] = await pool.query('SELECT * FROM courses WHERE id = ?', [courseId]);
-  return rows[0] || null;
-};
 
 const createCourse = async (courseData) => {
   const { name, instructor, description, enrollmentStatus, thumbnail, duration, schedule, location, prerequisites, syllabus, students } = courseData;
@@ -35,9 +26,56 @@ const createCourse = async (courseData) => {
 
   return courseId;
 };
+const findAll = async () => {
+  const [rows] = await pool.query('SELECT * FROM courses');
+  return rows;
+};
+const findById = async (courseId) => {
+  const [rows] = await pool.query('SELECT * FROM courses WHERE id = ?', [courseId]);
+  return rows[0] || null;
+};
+
+const markCourseAsCompleted = async (courseId, studentId) => {
+  try {
+    // Check if the student is enrolled in the course.
+    const [enrollment] = await pool.query('SELECT * FROM students WHERE course_id = ? AND student_id = ?', [courseId, studentId]);
+    if (enrollment.length === 0) {
+      // Student is not enrolled in the course.
+      return false;
+    }
+    // Mark the course as completed for the student.
+    await pool.query('UPDATE students SET completed = 1 WHERE course_id = ? AND student_id = ?', [courseId, studentId]);
+    return true;
+  } catch (error) {
+    console.error('Error in markCourseAsCompleted:', error);
+    throw error;
+  }
+};
+
+const getCourseDetailsForDashboard = async (studentId, courseId) => {
+  try {
+    // Check if the student is enrolled in the course.
+    const [enrollment] = await pool.query('SELECT * FROM students WHERE course_id = ? AND student_id = ?', [courseId, studentId]);
+    if (enrollment.length === 0) {
+      // Student is not enrolled in the course.
+      return null;
+    }
+
+    // Retrieve detailed information about the course.
+    const [courseDetails] = await pool.query('SELECT * FROM courses WHERE id = ?', [courseId]);
+
+    return courseDetails[0] || null;
+  } catch (error) {
+    console.error('Error in getCourseDetailsForDashboard:', error);
+    throw error;
+  }
+};
+
 
 module.exports = {
   createCourse,
   findAll,
   findById,
+  markCourseAsCompleted,
+  getCourseDetailsForDashboard
 };

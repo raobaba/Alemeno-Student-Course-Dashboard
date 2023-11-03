@@ -1,6 +1,7 @@
 const express = require("express");
 const pool = require('./config/db.js');
 const courseRouter = require('./routes/courseRoutes.js');
+const enrollRouter = require('./routes/enrollmentRoutes.js');
 const cors = require("cors");
 
 require("dotenv").config();
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: true }));
   }
 })();
 app.use('/api/v1',courseRouter);
+app.use('/api/v1',enrollRouter);
 
 app.get("/", (req, res) => {
   res.send("Server is Running! 🚀");

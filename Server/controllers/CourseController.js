@@ -32,9 +32,48 @@ const getCourseDetails = async (req, res) => {
     res.status(500).json({ error: 'Failed to retrieve course details' });
   }
 };
+
+
+const markCourseAsCompleted = async (req, res) => {
+  try {
+    const courseId = req.params.courseId;
+    const studentId = req.body.studentId;
+
+    const completionResult = await Course.markCourseAsCompleted(courseId, studentId);
+
+    if (completionResult === false) {
+      return res.status(400).json({ error: 'Student is not enrolled in the course or the course does not exist' });
+    }
+
+    res.json({ message: 'Course marked as completed for the student' });
+  } catch (error) {
+    console.error('Error in markCourseAsCompleted:', error);
+    throw error;
+  }
+};
+
+const getCourseDetailsForDashboard = async (req, res) => {
+  try {
+    const studentId = req.params.studentId;
+    const courseId = req.params.courseId;
+
+    const courseDetails = await Course.getCourseDetailsForDashboard(studentId, courseId);
+
+    if (!courseDetails) {
+      return res.status(400).json({ error: 'Student is not enrolled in the course or the course does not exist' });
+    }
+
+    res.json(courseDetails);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve course details for the student' });
+  }
+};
+
 // Define other course-related controller functions here (e.g., create, update, delete).
 module.exports = {
   createCourse,
   getCourses,
   getCourseDetails,
+  markCourseAsCompleted,
+  getCourseDetailsForDashboard
 };
