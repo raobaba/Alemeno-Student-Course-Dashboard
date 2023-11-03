@@ -1,11 +1,9 @@
-// routes/enrollmentRoutes.js
-
 const express = require('express');
-const router = express.Router();
-const EnrollmentController = require('../controllers/EnrollmentController');
-const { authenticate } = require('../middlewares/authenticationMiddleware');;
+const userRouter = express.Router();
+const { signupUser, loginUser } = require('../controllers/UserController.js');
 
-// Secured API endpoint
-router.get('/secured', authenticate, EnrollmentController.securedEndpoint);
+userRouter.post('/user/signup', signupUser);
+userRouter.post('/user/login', loginUser);
 
-module.exports = router;
+module.exports = userRouter;
+

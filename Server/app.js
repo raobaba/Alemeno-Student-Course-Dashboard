@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const pool = require('./config/db.js');
 const courseRouter = require('./routes/courseRoutes.js');
 const enrollRouter = require('./routes/enrollmentRoutes.js');
+const userRouter = require('./routes/userRoutes.js');
 const cors = require("cors");
 
 require("dotenv").config();
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 })();
 app.use('/api/v1',courseRouter);
 app.use('/api/v1',enrollRouter);
+app.use('/api/v1',userRouter);
 
 app.get("/", (req, res) => {
   res.send("Server is Running! 🚀");

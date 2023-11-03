@@ -1,30 +1,42 @@
-// controllers/AuthController.js
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const User = require('../models/User');;
+const jwt = require('jsonwebtoken');
+const { findUserByEmail, createUser } = require('../models/User');
 
-// Authenticate the user and generate a JWT token
-const login = async (req, res) => {
+const signupUser = async (req, res) => {
+  const { username, email, password } = req.body;
+  try {
+    const existingUser = await findUserByEmail(email);
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email already registered' });
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const userId = await createUser(username, email, hashedPassword);
+    res.json({ message: 'Signup successful', user: { id: userId, username, email } });
+  } catch (error) {
+    console.error('Signup error:', error);
+    res.status(500).json({ error: 'Signup failed' });
+  }
+};
+
+const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
-    // Find the user by email
-    const user = await User.findUserByEmail(email);
-    if (!user) {
-      return res.status(401).json({ error: 'Authentication failed. User not found.' });
+    const user = await findUserByEmail(email);
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
-    // Verify the password
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) {
-      return res.status(401).json({ error: 'Authentication failed. Wrong password.' });
-    }
-    // Generate a JWT token
-    const token = jwt.sign({ userId: user.id, email: user.email }, 'your-secret-key', { expiresIn: '1h' });
-    res.status(200).json({ token, userId: user.id });
+    const token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
+    // Store the token in a secure HttpOnly cookie
+    res.cookie('token', token, { maxAge: 3600000, httpOnly: true });
+    
+    res.json({ message: 'Login successful', user: { id: user.id, username: user.username, email: user.email }, token });
   } catch (error) {
-    res.status(500).json({ error: 'Authentication failed.' });
+    console.error('Login error:', error);
+    res.status(500).json({ error: 'Login failed' });
   }
 };
 
 module.exports = {
-  login,
+  signupUser,
+  loginUser,
 };
