@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieParser = require('cookie-parser');
 const pool = require('./config/db.js');
 const courseRouter = require('./routes/courseRoutes.js');
 const enrollRouter = require('./routes/enrollmentRoutes.js');
@@ -10,6 +11,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 (async () => {
