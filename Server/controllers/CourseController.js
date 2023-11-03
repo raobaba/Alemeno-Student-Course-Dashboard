@@ -91,6 +91,18 @@ const getPaginatedCourses = async (req, res) => {
   }
 };
 
+const searchCourses = async (req, res) => {
+  const { keyword, instructor, enrollmentStatus, duration } = req.query;
+
+  try {
+    const courses = await Course.searchCourses(keyword, instructor, enrollmentStatus, duration);
+    res.json(courses);
+  } catch (error) {
+    console.error('Error in searchCourses:', error);
+    res.status(500).json({ error: 'Failed to search for courses' });
+  }
+};
+
 // Define other course-related controller functions here (e.g., create, update, delete).
 module.exports = {
   createCourse,
@@ -98,5 +110,6 @@ module.exports = {
   getCourseDetails,
   markCourseAsCompleted,
   getCourseDetailsForDashboard,
-  getPaginatedCourses
+  getPaginatedCourses,
+  searchCourses
 };

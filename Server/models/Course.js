@@ -80,11 +80,42 @@ const findAllCourse = async (options) => {
   return rows;
 };
 
+const searchCourses = async (keyword, instructor, enrollmentStatus, duration) => {
+  // Build your SQL query based on the search criteria
+  let sql = 'SELECT * FROM courses WHERE 1';
+  const values = [];
+
+  if (keyword) {
+    sql += ' AND LOWER(name) LIKE ?';
+    values.push(`%${keyword.toLowerCase()}%`);
+  }
+
+  if (instructor) {
+    sql += ' AND LOWER(instructor) LIKE ?';
+    values.push(`%${instructor.toLowerCase()}%`);
+  }
+
+  if (enrollmentStatus) {
+    sql += ' AND enrollment_status = ?';
+    values.push(enrollmentStatus);
+  }
+
+  if (duration) {
+    sql += ' AND duration = ?';
+    values.push(duration);
+  }
+
+  const [rows] = await pool.query(sql, values);
+  return rows;
+};
+
+
 module.exports = {
   createCourse,
   findAll,
   findById,
   markCourseAsCompleted,
   getCourseDetailsForDashboard,
-  findAllCourse
+  findAllCourse,
+  searchCourses
 };
