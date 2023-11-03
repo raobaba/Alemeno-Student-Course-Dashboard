@@ -12,7 +12,7 @@ function Navbar() {
       <div className="nav-links">
         <ul>
           <li>
-            <Link to="/course-list">CourseList</Link>
+            <Link to="/">CourseList</Link>
           </li>
           <li>
             <Link to="/course-details">CourseDetails</Link>

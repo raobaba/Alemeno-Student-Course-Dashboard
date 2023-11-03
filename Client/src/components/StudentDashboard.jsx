@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import '../styles/StudentDashboard.css'; // Import your CSS file for styling.
 
-function StudentDashboard({ enrolledCourses }) {
+function StudentDashboard() {
   const [completedCourses, setCompletedCourses] = useState([]);
 
   const markAsCompleted = (courseId) => {
@@ -12,7 +12,7 @@ function StudentDashboard({ enrolledCourses }) {
   return (
     <div className="student-dashboard">
       <h1>Student Dashboard</h1>
-      <div className="enrolled-courses">
+      {/* <div className="enrolled-courses">
         {enrolledCourses.map((course) => (
           <div key={course.id} className="course-card">
             <img src={course.thumbnail} alt={course.name} />
@@ -34,7 +34,7 @@ function StudentDashboard({ enrolledCourses }) {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
