@@ -6,6 +6,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <div style={{height:'40px'}}></div>
       <AllRoutes/>
     </>
   );
