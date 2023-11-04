@@ -26,6 +26,7 @@ function CourseList() {
     <div className="course-listing">
       <h1>Course Listing</h1>
       <input
+       className="search-input"
         type="text"
         placeholder="Search by course or instructor name"
         value={searchTerm}

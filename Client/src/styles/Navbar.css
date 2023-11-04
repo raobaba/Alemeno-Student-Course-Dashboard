@@ -39,7 +39,7 @@
   .nav-links a {
     text-decoration: none;
     color: black;
-    font-weight: 200; 
+    font-weight: 400; 
     transition: color 0.2s;
     font-size: 18px;
   }
