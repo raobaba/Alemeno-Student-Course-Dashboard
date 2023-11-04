@@ -30,7 +30,7 @@
   
   .nav-links li {
     margin-top: 8px;
-    margin-right: 10px;
+    margin-right: 5px;
     height: 20px;
     background-color: #fff;
     border: none;
@@ -39,9 +39,8 @@
   .nav-links a {
     text-decoration: none;
     color: black;
-    font-weight: 400; 
+    font-weight: 600; 
     transition: color 0.2s;
-    font-size: 18px;
   }
   
   .nav-links a:hover {

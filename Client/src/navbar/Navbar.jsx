@@ -12,19 +12,19 @@ function Navbar() {
       <div className="nav-links">
         <ul>
           <li>
-            <Link to="/">CourseList</Link>
+            <Link to="/">COURSELIST</Link>
           </li>
           <li>
-            <Link to="/course-details">CourseDetails</Link>
+            <Link to="/course-details">COURSEDETAILS</Link>
           </li>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboard">DASHBOARD</Link>
           </li>
           <li>
-            <Link to="/login">LogIn</Link>
+            <Link to="/login">LOGIN</Link>
           </li>
           <li>
-            <Link to="/signup">SignUp</Link>
+            <Link to="/signup">SIGNUP</Link>
           </li>
         </ul>
       </div>

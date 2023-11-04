@@ -50,9 +50,14 @@ function CourseList() {
                   <p><strong>Instructor:</strong> {course.instructor}</p>
                   <p>{course.description}</p>
                 </div>
+                <div style={{display:'flex',justifyContent:'space-around'}}>
+                <button className="details-button">
+                  <Link to={`/course-details/${course.id}`}>Enroll In Course</Link>
+                </button>
                 <button className="details-button">
                   <Link to={`/course-details/${course.id}`}>View Details</Link>
                 </button>
+                </div>
                </div>
               </li>
             ))
