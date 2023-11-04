@@ -50,7 +50,7 @@ function CourseDetails() {
               {course.prerequisites && course.prerequisites.length > 0 ? (
                 <ul>
                   {course.prerequisites.map((prerequisite, index) => (
-                    <li key={index}>{prerequisite}</li>
+                    <li style={{height:'auto'}} key={index}>{prerequisite}</li>
                   ))}
                 </ul>
               ) : (
@@ -63,7 +63,7 @@ function CourseDetails() {
             {course.syllabus ? (
               <ul>
                 {course.syllabus.map((item, index) => (
-                  <li style={{ display: "grid" }} key={index}>
+                  <li style={{ display: "grid",height:'auto' }} key={index}>
                     <strong>Week {item.week}:</strong>
                     <p>{item.topic}</p>
                     <p>{item.content}</p>

@@ -1,5 +1,5 @@
 .course-details {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   margin-top: 90px;
   padding: 20px;
@@ -64,7 +64,7 @@ course-text {
 .link-button {
   display: inline-block;
   margin-left: 10px;
-  width: 150px;
+  width: 170px;
   height: 30px;
   background-color: #083863;
   color: #f7f7f7;

@@ -43,16 +43,16 @@ function CourseList() {
             })
             .map((course) => (
               <li key={course.id}>
-                <div className="item-arrange">
-                <div className="course-info">
+               <div>
+               <div className="course-info">
                   <h2>{course.name}</h2>
                   <p><strong>Instructor:</strong> {course.instructor}</p>
                   <p>{course.description}</p>
                 </div>
-                <button className="course-list">
+                <button className="details-button">
                   <Link to={`/course-details/${course.id}`}>View Details</Link>
                 </button>
-                </div>
+               </div>
               </li>
             ))
         )}

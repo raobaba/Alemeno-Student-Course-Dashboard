@@ -27,21 +27,21 @@ input[type="text"] {
   list-style: none;
   padding: 0;
   margin-bottom: -30px;
-  border: 1px solid black;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
+  
 }
 
 li {
   background-color: #f8f8f8;
+  border: 1px solid #ddd;
   width: 80%;
-  height: 200px;
   border-radius: 5px;
   padding: 20px;
+  height: 200px;
   margin-bottom: 10px;
   display: flex;
-  border: 1px solid black;
   justify-content: space-between;
   align-items: center;
 }
@@ -84,6 +84,11 @@ button {
 a {
   text-decoration: none;
   color: #fff;
+}
+
+.details-button {
+  margin-top: 10px;
+  margin-left: 95px;
 }
 
 button:hover {
