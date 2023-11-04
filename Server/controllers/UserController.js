@@ -35,8 +35,13 @@ const loginUser = async (req, res) => {
     res.status(500).json({ error: 'Login failed' });
   }
 };
+const logoutUser = (req, res) => {
+  res.clearCookie('token');
+  res.json({ message: 'Logout successful' });
+};
 
 module.exports = {
   signupUser,
   loginUser,
+  logoutUser
 };

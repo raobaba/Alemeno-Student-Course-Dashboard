@@ -1,56 +1,90 @@
-/* CourseDetails.css */
-
 .course-details {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 90px;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.heading {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.details-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.course-info {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.course-title {
+  font-size: 24px;
+  margin: 0;
+  color: #333;
+}
+
+course-text {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #666;
+}
+
+.syllabus {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.syllabus-title {
+  font-size: 20px;
+  margin: 0;
+  color: #333;
+}
+
+.link-button {
+  display: inline-block;
+  margin-left: 10px;
+  width: 150px;
+  height: 30px;
+  background-color: #083863;
+  color: #f7f7f7;
+  text-align: center;
+  padding-top: 15px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 600px) {
+  .course-details {
+    padding: 10px;
   }
-  
-  h1 {
-    text-align: center;
-    font-size: 24px;
+  .details-container {
+    flex-direction: column;
+  }
+  .course-info,
+  .syllabus {
+    margin-right: 0;
     margin-bottom: 20px;
   }
-  
-  .details-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-  
-  .course-info {
-    flex: 1;
-  }
-  
-  h2 {
-    font-size: 20px;
-    margin: 0;
-    color: #333;
-  }
-  
-  p {
-    font-size: 16px;
-    margin: 5px 0;
-    color: #666;
-  }
-  
-  .syllabus {
-    flex: 1;
-  }
-  
-  h3 {
-    font-size: 18px;
-    margin: 0;
-    color: #333;
-  }
-  
-  /* Media queries for responsiveness */
-  @media (max-width: 600px) {
-    .course-details {
-      padding: 10px;
-    }
-    .details-container {
-      flex-direction: column;
-    }
-  }
-  
+}

@@ -31,8 +31,28 @@ const findAll = async () => {
   return rows;
 };
 const findById = async (courseId) => {
-  const [rows] = await pool.query('SELECT * FROM courses WHERE id = ?', [courseId]);
-  return rows[0] || null;
+  try {
+    const [courseData] = await pool.query('SELECT * FROM courses WHERE id = ?', [courseId]);
+    if (courseData.length === 0) {
+      return null; // Course not found
+    }
+
+    const [students] = await pool.query('SELECT * FROM students WHERE course_id = ?', [courseId]);
+    const [prerequisites] = await pool.query('SELECT prerequisite FROM prerequisites WHERE course_id = ?', [courseId]);
+    const [syllabus] = await pool.query('SELECT week, topic, content FROM syllabus WHERE course_id = ?', [courseId]);
+
+    const course = {
+      ...courseData[0],
+      students,
+      prerequisites: prerequisites.map((row) => row.prerequisite),
+      syllabus,
+    };
+
+    return course;
+  } catch (error) {
+    console.error('Error in getCourseById:', error);
+    throw error;
+  }
 };
 
 const markCourseAsCompleted = async (courseId, studentId) => {
