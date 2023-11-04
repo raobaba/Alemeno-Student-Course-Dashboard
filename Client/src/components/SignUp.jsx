@@ -64,7 +64,7 @@ function SignUp() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button onClick={handleSignUp} disabled={loading}>
+      <button className="signup-button" onClick={handleSignUp} disabled={loading}>
         {loading ? "Signing Up..." : "Sign Up"}
       </button>
     </div>
