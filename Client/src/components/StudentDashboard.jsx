@@ -16,25 +16,25 @@ function StudentDashboard({ studentId }) {
   // Access the enrolled courses state from the Redux store
   const enrolledCourses = useSelector((state) => state.student.enrolledCourses);
   const loadingEnrolledCourses = useSelector((state) => state.student.loadingEnrolledCourses);
+  console.log(enrolledCourses)
+  // const handleEnrollCourse = (courseId) => {
+  //   setLoadingEnrollCourse(true);
 
-  const handleEnrollCourse = (courseId) => {
-    setLoadingEnrollCourse(true);
-
-    // Dispatch the action to enroll in the course
-    dispatch(enrollCourse(studentId, courseId))
-      .then(() => {
-        setLoadingEnrollCourse(false);
-      })
-      .catch(() => {
-        setLoadingEnrollCourse(false);
-      });
-  };
+  //   // Dispatch the action to enroll in the course
+  //   dispatch(enrollCourse(studentId, courseId))
+  //     .then(() => {
+  //       setLoadingEnrollCourse(false);
+  //     })
+  //     .catch(() => {
+  //       setLoadingEnrollCourse(false);
+  //     });
+  // };
 
   return (
     <div className="dashboard-container">
       <h1>Student Dashboard</h1>
       <h2>Enrolled Courses:</h2>
-      {loadingEnrolledCourses ? (
+      {/* {loadingEnrolledCourses ? (
         <p>Loading enrolled courses...</p>
       ) : (
         <ul className="course-list">
@@ -66,7 +66,7 @@ function StudentDashboard({ studentId }) {
             <p>No enrolled courses found.</p>
           )}
         </ul>
-      )}
+      )} */}
     </div>
   );
 }
