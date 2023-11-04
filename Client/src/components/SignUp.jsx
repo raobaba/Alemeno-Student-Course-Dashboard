@@ -10,7 +10,6 @@ function SignUp() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [hasSignedUp, setHasSignedUp] = useState(false);
 
   // Access the loading, success, and error states from the Redux store
   const loading = useSelector((state) => state.app.loading);
@@ -19,21 +18,18 @@ function SignUp() {
 
   const handleSignUp = () => {
     // Don't allow signup if already in the loading state
-    if (loading || hasSignedUp) {
+    if (loading) {
       return;
     }
     // Dispatch the signup action
     dispatch(signUpUser(username, email, password));
-  
-  };
-
-  useEffect(() => {
-    if (success) {
-      setHasSignedUp(true);
-      navigate("/login");
+    if(success){
+      setTimeout(()=>{
+        navigate("/login");
+      },3000)
     }
-  }, [success, navigate]);
 
+  };
 
   return (
     <div className="signup-container">
