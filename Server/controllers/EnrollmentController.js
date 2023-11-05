@@ -34,7 +34,7 @@ const getEnrolledCourses = async (req, res) => {
 
     const enrolledCourses = await Course.getEnrolledCourses(studentId);
 
-    res.json({enrolledCourses});
+    res.json(enrolledCourses);
   } catch (error) {
     res.status(500).json({ error: "Failed to retrieve enrolled courses" });
   }

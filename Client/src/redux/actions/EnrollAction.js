@@ -16,6 +16,7 @@ export const enrollCourse = (studentId, courseId) => {
       try {
         const response = await api.post(`/courses/${courseId}/enroll`, { studentId });
         dispatch({ type: ENROLL_COURSE_SUCCESS, payload: response.data });
+        console.log(response.data)
       } catch (error) {
         dispatch({ type: ENROLL_COURSE_FAILURE, error: error.message });
       }
@@ -33,7 +34,6 @@ export const fetchEnrolledCourses = (studentId) => {
         type: FETCH_ENROLLED_COURSES_SUCCESS,
         payload: response.data,
       });
-      console.log("Enrolled Courses",response.data);
     } catch (error) {
       dispatch({ type: FETCH_ENROLLED_COURSES_FAILURE, error: error.message });
     }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCourses } from "../redux/actions/CourseAction";
+import { enrollCourse } from "../redux/actions/EnrollAction";
 import { Link } from "react-router-dom"; // Import Link from React Router
 import "../styles/CourseList.css";
 
@@ -20,6 +21,9 @@ function CourseList() {
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+  };
+  const handleEnroll = (courseId) => {
+    dispatch(enrollCourse(courseId));
   };
 
   return (
@@ -51,9 +55,9 @@ function CourseList() {
                   <p>{course.description}</p>
                 </div>
                 <div style={{display:'flex',justifyContent:'space-around'}}>
-                <button className="details-button">
-                  <Link to={`/course-details/${course.id}`}>Enroll In Course</Link>
-                </button>
+                <button className="details-button" onClick={() => handleEnroll(course.id)}>
+                      Enroll In Course
+                    </button>
                 <button className="details-button">
                   <Link to={`/course-details/${course.id}`}>View Details</Link>
                 </button>

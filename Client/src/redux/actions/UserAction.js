@@ -53,7 +53,7 @@ export const loginUser = (email, password) => {
             type: LOGIN_USER_SUCCESS,
             payload: response.data,
           });
-          Cookies.set('studentId', '115');
+          Cookies.set('studentId', response.data.user.id);
           console.log('Login Successful. Response Data:', response.data.user.id);
         })
         .catch((error) => {
