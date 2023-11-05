@@ -91,6 +91,35 @@ button:hover {
   background-color: #0056b3;
 }
 
+
+/* CourseList.css */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+
 /* Media queries for responsiveness */
 @media (max-width: 600px) {
   .course-listing {

@@ -89,15 +89,16 @@ const getCourseDetailsForDashboard = async (req, res) => {
 
 const getPaginatedCourses = async (req, res) => {
   try {
-    // Extract page and pageSize values from the request or JSON data.
-    const { page, pageSize } = req.body;
-    // Check if page and pageSize are valid numbers.
-    if (isNaN(page) || isNaN(pageSize)) {
-      return res.status(400).json({ error: "Invalid page or pageSize values" });
+    // Extract page and pageSize values from the query string.
+    const page = req.query.page || 1; // Default to page 1 if not provided
+    const pageSize = 10; // Set pageSize to 10 items per page
+    // Check if page is a valid number.
+    if (isNaN(page) || page <= 0) {
+      return res.status(400).json({ error: "Invalid page value" });
     }
     const options = {
       page: parseInt(page), // Parse page as an integer
-      pageSize: parseInt(pageSize), // Parse pageSize as an integer
+      pageSize,
     };
     // Use the options object to fetch paginated courses.
     const courses = await Course.findAllCourse(options);

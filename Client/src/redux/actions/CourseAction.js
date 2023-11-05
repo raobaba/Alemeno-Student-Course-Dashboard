@@ -8,14 +8,26 @@ import {
   FETCH_COURSE_LOADING,
   FETCH_COURSE_SUCCESS,
   FETCH_COURSE_FAILURE,
+  SET_PAGINATION, // Include the SET_PAGINATION action type
 } from '../actionTypes/CourseActionType';
 
-export const fetchCourses = () => {
+// Add a new action creator for setting pagination
+export const setPagination = (page, pageSize) => {
+  return {
+    type: SET_PAGINATION,
+    payload: { page, pageSize },
+  };
+};
+
+// CourseActions.js
+export const fetchCourses = (page, pageSize) => {
   return (dispatch) => {
+    dispatch(setPagination(page, pageSize)); // Set pagination data
+
     dispatch({ type: FETCH_COURSES_LOADING });
 
     api
-      .get('/courses') // Use the correct API endpoint
+      .get('/coursesperpage', { params: { page, pageSize } }) // Include pagination parameters in the request
       .then((response) => {
         dispatch({
           type: FETCH_COURSES_SUCCESS,
@@ -52,5 +64,3 @@ export const fetchCourse = (courseId) => {
       });
   };
 };
-
-
