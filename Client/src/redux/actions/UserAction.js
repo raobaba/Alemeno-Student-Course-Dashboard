@@ -1,4 +1,5 @@
 import api from '../../service/api.js';
+import Cookies from 'js-cookie';
 import {
   SIGN_UP_USER_LOADING,
   SIGN_UP_USER_SUCCESS,
@@ -8,23 +9,24 @@ import {
   LOGIN_USER_FAILURE,
 } from '../actionTypes/UserActionType';
 
-export const signUpUser = (username, email, password) => {
+export const signUpUser = (name, email, password) => {
   return (dispatch) => {
     dispatch({ type: SIGN_UP_USER_LOADING });
 
     const requestData = {
-      username,
+      name,
       email,
       password,
     };
-
+console.log(requestData)
     api
-      .post('/user/signup', requestData)
+      .post('/student/signup', requestData)
       .then((response) => {
         dispatch({
           type: SIGN_UP_USER_SUCCESS,
           payload: response.data,
         });
+        console.log('Signup Successful. Response Data:', response.data.user.id);
       })
       .catch((error) => {
         dispatch({
@@ -45,12 +47,14 @@ export const loginUser = (email, password) => {
       };
   
       api
-        .post('/user/login', requestData) // Adjust the API endpoint as per your backend
+        .post('/student/login', requestData) // Adjust the API endpoint as per your backend
         .then((response) => {
           dispatch({
             type: LOGIN_USER_SUCCESS,
             payload: response.data,
           });
+          Cookies.set('studentId', '115');
+          console.log('Login Successful. Response Data:', response.data.user.id);
         })
         .catch((error) => {
           dispatch({

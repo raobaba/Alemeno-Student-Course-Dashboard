@@ -33,6 +33,7 @@ export const fetchEnrolledCourses = (studentId) => {
         type: FETCH_ENROLLED_COURSES_SUCCESS,
         payload: response.data,
       });
+      console.log("Enrolled Courses",response.data);
     } catch (error) {
       dispatch({ type: FETCH_ENROLLED_COURSES_FAILURE, error: error.message });
     }

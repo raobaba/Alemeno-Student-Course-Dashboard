@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { enrollCourse, fetchEnrolledCourses } from '../redux/actions/EnrollAction.js';
 import '../styles/StudentDashboard.css'; // Import the CSS
 
-function StudentDashboard({ studentId }) {
+function StudentDashboard() {
+  const studentId = Cookies.get('studentId');
   const dispatch = useDispatch();
 
   const [loadingEnrollCourse, setLoadingEnrollCourse] = useState(false);
@@ -12,29 +14,29 @@ function StudentDashboard({ studentId }) {
   useEffect(() => {
     dispatch(fetchEnrolledCourses(studentId));
   }, [dispatch, studentId]);
-
-  // Access the enrolled courses state from the Redux store
+ 
+  console.log("studentId",studentId)
   const enrolledCourses = useSelector((state) => state.student.enrolledCourses);
   const loadingEnrolledCourses = useSelector((state) => state.student.loadingEnrolledCourses);
   console.log(enrolledCourses)
-  // const handleEnrollCourse = (courseId) => {
-  //   setLoadingEnrollCourse(true);
+  const handleEnrollCourse = (courseId) => {
+    setLoadingEnrollCourse(true);
 
-  //   // Dispatch the action to enroll in the course
-  //   dispatch(enrollCourse(studentId, courseId))
-  //     .then(() => {
-  //       setLoadingEnrollCourse(false);
-  //     })
-  //     .catch(() => {
-  //       setLoadingEnrollCourse(false);
-  //     });
-  // };
+    // Dispatch the action to enroll in the course
+    dispatch(enrollCourse(studentId, courseId))
+      .then(() => {
+        setLoadingEnrollCourse(false);
+      })
+      .catch(() => {
+        setLoadingEnrollCourse(false);
+      });
+  };
 
   return (
     <div className="dashboard-container">
       <h1>Student Dashboard</h1>
       <h2>Enrolled Courses:</h2>
-      {/* {loadingEnrolledCourses ? (
+      {loadingEnrolledCourses ? (
         <p>Loading enrolled courses...</p>
       ) : (
         <ul className="course-list">
@@ -66,7 +68,7 @@ function StudentDashboard({ studentId }) {
             <p>No enrolled courses found.</p>
           )}
         </ul>
-      )} */}
+      )}
     </div>
   );
 }

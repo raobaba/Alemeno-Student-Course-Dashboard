@@ -7,7 +7,7 @@ import "../styles/SignUp.css";
 function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,7 +22,8 @@ function SignUp() {
       return;
     }
     // Dispatch the signup action
-    dispatch(signUpUser(username, email, password));
+    dispatch(signUpUser(name, email, password));
+    console.log(success)
     if(success){
       setTimeout(()=>{
         navigate("/login");
@@ -42,9 +43,9 @@ function SignUp() {
         <input
           style={{ width: "93%" }}
           type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div>
