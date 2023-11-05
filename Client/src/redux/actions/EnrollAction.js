@@ -25,6 +25,7 @@ export const enrollCourse = (studentId, courseId) => {
       } catch (error) {
         dispatch({ type: ENROLL_COURSE_FAILURE, error: error.response.data.error });
         console.log(error.response.data.error);
+        alert(error.response.data.error)
       }
     };
   };
