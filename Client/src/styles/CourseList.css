@@ -39,16 +39,13 @@ li {
   width: 80%;
   border-radius: 5px;
   padding: 20px;
-  height: 200px;
+  height: auto;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.course-info {
-  flex: 1;
-}
 
 h2 {
   font-size: 20px;
