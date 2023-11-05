@@ -6,18 +6,13 @@ const findStudentByEmail = async (email) => {
   return rows[0] || null;
 };
 
-const updateStudentPassword = async (email, password) => {
-  const [result] = await pool.query('UPDATE students SET password = ? WHERE student_email = ?', [password, email]);
-  return result.affectedRows > 0;
-};
-
 const createStudent = async (name, email, password) => { 
   const [result] = await pool.query('INSERT INTO students (student_name, student_email, password) VALUES (?, ?, ?)', [name, email, password]);
   return result.insertId;
 };
 
+
 module.exports = {
   findStudentByEmail, 
-  updateStudentPassword,
   createStudent, 
 };

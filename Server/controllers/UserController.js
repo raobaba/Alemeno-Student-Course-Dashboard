@@ -22,34 +22,19 @@ const loginStudent = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await findStudentByEmail(email);
-
-    // Check if the user exists and if the password is not stored
-    if (!user || !user.password) {
-      // Hash the provided password
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      // Store the hashed password in the database
-      await updateStudentPassword(email, hashedPassword); // You'll need to implement this function
-
-      // Generate a token
-      const token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
-
-      // Store the token in a secure HttpOnly cookie
-      res.cookie('token', token, { maxAge: 3600000, httpOnly: true });
-
-      res.json({ message: 'Login successful', user: { id: user.id, name: user.name, email: user.email }, token });
-    } else if (await bcrypt.compare(password, user.password)) {
-      // Password matches, generate a token
-      const token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
-
-      // Store the token in a secure HttpOnly cookie
-      res.cookie('token', token, { maxAge: 3600000, httpOnly: true });
-
-      res.json({ message: 'Login successful', user: { id: user.id, name: user.name, email: user.email }, token });
-    } else {
-      // Password is incorrect
-      res.status(401).json({ error: 'Invalid credentials' });
+    if (!user) {
+      return res.status(401).json({ error: 'User not found' });
     }
+    // Compare the provided password with the stored hashed password
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ error: 'Invalid password' });
+    }
+    // Password matches, generate a token
+    const token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
+    // Store the token in a secure HttpOnly cookie
+    res.cookie('token', token, { maxAge: 3600000, httpOnly: true });
+    res.json({ message: 'Login successful', user: { id: user.id, name: user.name, email: user.email }, token });
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ error: 'Login failed' });

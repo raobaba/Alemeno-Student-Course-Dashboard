@@ -1,7 +1,7 @@
 const express = require('express');
 const courseRouter = express.Router();
 const CourseController = require('../controllers/CourseController');
-const {checkLoggedIn} = require('../middlewares/authenticationMiddleware');
+const checkLoggedIn = require('../middlewares/authenticationMiddleware');
 //post data
 
 courseRouter.post('/courses', CourseController.createCourse);

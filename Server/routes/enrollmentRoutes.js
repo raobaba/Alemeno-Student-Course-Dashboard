@@ -1,9 +1,10 @@
-const express = require('express');
+const express = require("express");
 const enrollRouter = express.Router();
-const EnrollmentController = require('../controllers/EnrollmentController.js');
+const checkLoggedIn = require('../middlewares/authenticationMiddleware');
+const { enrollStudentInCourse, getEnrolledCourses } = require("../controllers/EnrollmentController.js");
 
 // Enroll a student in a course
-enrollRouter.post('/courses/:courseId/enroll', EnrollmentController.enrollStudentInCourse);
-enrollRouter.get('/students/:studentId/courses', EnrollmentController.getEnrolledCourses);
+enrollRouter.post("/courses/:courseId/enroll",checkLoggedIn,  enrollStudentInCourse);
+enrollRouter.get("/students/:studentId/courses",checkLoggedIn,  getEnrolledCourses);
 
 module.exports = enrollRouter;

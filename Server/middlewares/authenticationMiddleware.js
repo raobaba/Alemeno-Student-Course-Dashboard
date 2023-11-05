@@ -18,5 +18,5 @@ const checkLoggedIn = async (req, res, next) => {
   }
 };
 
-module.exports = { checkLoggedIn };
+module.exports = checkLoggedIn ;
 
